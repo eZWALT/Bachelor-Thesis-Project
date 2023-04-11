@@ -1,0 +1,21 @@
+
++ LLVM es un conjunt de projectes de compilació, ensemblatge, programació paralela, debuggers... d'entre ells MLIR, OpenMP, CLANG... que busca oferir un conjunt de llibreries reusables de codi obert 
+
++ La compilació sol caracteritzar-se per 3 etapes diferenciades:
+    ++Front-end(Cada llenguatge te el seu): analisis lexic , gramatical (parsing), semàntic (cerca d'errors de tipus i simbols) del cual es genera el AST 
+    ++Middle-end(Gairebé independent del llenguatge): etapa dedica a la optimització de calculs redundants , codi intermig  (OPTIMITZADOR)
+            JIT compilers fan servir el seu propi codi intermig com java fa servir el bytecode (interifice entre front-end i el optimitzador)
+    ++Back-end(Depen de cada ensamblador): transforma el codi a instruccions , depenent del InstructionSet desitjat (MIPS,x86...) fent feines com seleccionar les instruccions adecuades , explotar features del instruction set concret, instruction scheduling, register allocation...
+
++ LLVM es el Middle-end , el optimitzador que busca explotar una feature "Retargetability", per evitar haber de fer un optimitzador i back-end sencer per cada implementació
+  de llenguatge alt nivell a baix nivell. Es busca reaprofitar i reusar l'etapa intermitga per evitar la situació seguent:
+    ++ Si tenim N instruction sets que volem suportar per a M llenguatges d'alt nivell , tindrem N * M compiladors , un per cada llenguatge i ensamblador (SOURCE LANG = ALT NIVELL, TARGET LANG = BAIX NIVELL)
+
+
+
++ un avantatge important de LLVM es que per com és i la seva politica de ser codi obert, contribueix molta més gent que no pas si fos un llenguatge d'una empresa o d'un projecte particular
+  llavors tot aquesta infraestructura va rebent colaboracions amb el temps de programadors experts, empreses, estudiants universitàris, recercadors... Hi han compiladors que són propietàris (privats)
+  que depenen directament de el pressupost i esforços de l'empresa o grup per la seva qualitat, com el intel ICC d'alta qualitat pero públic reduit.
+  LLVM amb aquesta estructura permet una divisió clara entre front-end i back-end, reduint enormement la complexitat de aportar en un compilador qualsevol de manera openSource.
+
++ 
