@@ -1,0 +1,22 @@
+!s32i = !cir.int<s, 32>
+#fn_attr = #cir<extra({inline = #cir.inline<no>, nothrow = #cir.nothrow, optnone = #cir.optnone})>
+module @"/home/walterjtv/Escritorio/Q8/TFG/tutorial/openmp/4_basic_taskyield.c" attributes {cir.lang = #cir.lang<c>, cir.sob = #cir.signed_overflow_behavior<undefined>, dlti.dl_spec = #dlti.dl_spec<#dlti.dl_entry<f16, dense<16> : vector<2xi64>>, #dlti.dl_entry<f64, dense<64> : vector<2xi64>>, #dlti.dl_entry<f128, dense<128> : vector<2xi64>>, #dlti.dl_entry<!llvm.ptr<271>, dense<32> : vector<4xi64>>, #dlti.dl_entry<i8, dense<8> : vector<2xi64>>, #dlti.dl_entry<i16, dense<16> : vector<2xi64>>, #dlti.dl_entry<!llvm.ptr<270>, dense<32> : vector<4xi64>>, #dlti.dl_entry<i32, dense<32> : vector<2xi64>>, #dlti.dl_entry<f80, dense<128> : vector<2xi64>>, #dlti.dl_entry<!llvm.ptr, dense<64> : vector<4xi64>>, #dlti.dl_entry<i1, dense<8> : vector<2xi64>>, #dlti.dl_entry<!llvm.ptr<272>, dense<64> : vector<4xi64>>, #dlti.dl_entry<i64, dense<64> : vector<2xi64>>, #dlti.dl_entry<i128, dense<128> : vector<2xi64>>, #dlti.dl_entry<"dlti.endianness", "little">, #dlti.dl_entry<"dlti.stack_alignment", 128 : i64>>, llvm.data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128"} {
+  cir.func no_proto @main() -> !s32i extra(#fn_attr) {
+    %0 = cir.alloca !s32i, cir.ptr <!s32i>, ["__retval"] {alignment = 4 : i64} loc(#loc2)
+    omp.taskyield loc(#loc8)
+    %1 = cir.const(#cir.int<42> : !s32i) : !s32i loc(#loc5)
+    cir.store %1, %0 : !s32i, cir.ptr <!s32i> loc(#loc9)
+    %2 = cir.load %0 : cir.ptr <!s32i>, !s32i loc(#loc9)
+    cir.return %2 : !s32i loc(#loc9)
+  } loc(#loc7)
+} loc(#loc)
+#loc = loc("/home/walterjtv/Escritorio/Q8/TFG/tutorial/openmp/4_basic_taskyield.c":0:0)
+#loc1 = loc("4_basic_taskyield.c":2:1)
+#loc2 = loc("4_basic_taskyield.c":5:1)
+#loc3 = loc("4_basic_taskyield.c":3:2)
+#loc4 = loc("4_basic_taskyield.c":3:23)
+#loc5 = loc("4_basic_taskyield.c":4:9)
+#loc6 = loc("4_basic_taskyield.c":4:2)
+#loc7 = loc(fused[#loc1, #loc2])
+#loc8 = loc(fused[#loc3, #loc4])
+#loc9 = loc(fused[#loc6, #loc5])

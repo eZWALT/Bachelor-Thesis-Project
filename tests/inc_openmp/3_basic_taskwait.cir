@@ -1,0 +1,29 @@
+!s32i = !cir.int<s, 32>
+!void = !cir.void
+#fn_attr = #cir<extra({inline = #cir.inline<no>, nothrow = #cir.nothrow, optnone = #cir.optnone})>
+module @"/home/walterjtv/Escritorio/Q8/TFG/tutorial/openmp/3_basic_taskwait.c" attributes {cir.lang = #cir.lang<c>, cir.sob = #cir.signed_overflow_behavior<undefined>, dlti.dl_spec = #dlti.dl_spec<#dlti.dl_entry<f80, dense<128> : vector<2xi64>>, #dlti.dl_entry<i32, dense<32> : vector<2xi64>>, #dlti.dl_entry<i128, dense<128> : vector<2xi64>>, #dlti.dl_entry<f16, dense<16> : vector<2xi64>>, #dlti.dl_entry<i64, dense<64> : vector<2xi64>>, #dlti.dl_entry<f64, dense<64> : vector<2xi64>>, #dlti.dl_entry<f128, dense<128> : vector<2xi64>>, #dlti.dl_entry<!llvm.ptr<271>, dense<32> : vector<4xi64>>, #dlti.dl_entry<!llvm.ptr, dense<64> : vector<4xi64>>, #dlti.dl_entry<i1, dense<8> : vector<2xi64>>, #dlti.dl_entry<!llvm.ptr<272>, dense<64> : vector<4xi64>>, #dlti.dl_entry<i8, dense<8> : vector<2xi64>>, #dlti.dl_entry<i16, dense<16> : vector<2xi64>>, #dlti.dl_entry<!llvm.ptr<270>, dense<32> : vector<4xi64>>, #dlti.dl_entry<"dlti.endianness", "little">, #dlti.dl_entry<"dlti.stack_alignment", 128 : i64>>, llvm.data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128"} {
+  cir.func no_proto @omp_taskwait_1() extra(#fn_attr) {
+    omp.taskwait loc(#loc10)
+    cir.return loc(#loc2)
+  } loc(#loc9)
+  cir.func no_proto @main() -> !s32i extra(#fn_attr) {
+    %0 = cir.alloca !s32i, cir.ptr <!s32i>, ["__retval"] {alignment = 4 : i64} loc(#loc6)
+    %1 = cir.get_global @omp_taskwait_1 : cir.ptr <!cir.func<!void ()>> loc(#loc12)
+    cir.call @omp_taskwait_1() : () -> () loc(#loc7)
+    %2 = cir.load %0 : cir.ptr <!s32i>, !s32i loc(#loc6)
+    cir.return %2 : !s32i loc(#loc6)
+  } loc(#loc11)
+} loc(#loc)
+#loc = loc("/home/walterjtv/Escritorio/Q8/TFG/tutorial/openmp/3_basic_taskwait.c":0:0)
+#loc1 = loc("3_basic_taskwait.c":2:1)
+#loc2 = loc("3_basic_taskwait.c":4:1)
+#loc3 = loc("3_basic_taskwait.c":3:2)
+#loc4 = loc("3_basic_taskwait.c":3:22)
+#loc5 = loc("3_basic_taskwait.c":7:1)
+#loc6 = loc("3_basic_taskwait.c":9:1)
+#loc7 = loc("3_basic_taskwait.c":8:2)
+#loc8 = loc("3_basic_taskwait.c":8:17)
+#loc9 = loc(fused[#loc1, #loc2])
+#loc10 = loc(fused[#loc3, #loc4])
+#loc11 = loc(fused[#loc5, #loc6])
+#loc12 = loc(fused[#loc7, #loc8])
