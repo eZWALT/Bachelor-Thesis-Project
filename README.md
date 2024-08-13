@@ -1,4 +1,4 @@
-# CIR Bachelor Thesis Project (TFG)
+# CIR Bachelor Thesis Project (TFG) 🖥️🛠️
 
 ## Description
 
